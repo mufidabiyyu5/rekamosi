@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rekamosi/pages/detailpage.dart';
+import 'package:rekamosi/pages/homepage.dart';
 import 'package:rekamosi/pages/register.dart';
 import 'package:rekamosi/theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,6 +18,11 @@ class _LoginState extends State<Login> {
   void _navigateToRegisterScreen(BuildContext context) {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => Register()));
+  }
+
+  void _navigateToHomePageScreen(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => HomePage()));
   }
 
   @override
@@ -189,7 +196,9 @@ class _LoginState extends State<Login> {
                               shadowColor:
                                   MaterialStatePropertyAll(Colors.transparent),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              _navigateToHomePageScreen(context);
+                            },
                             child: Text(
                               'Login',
                               style: TextStyle(

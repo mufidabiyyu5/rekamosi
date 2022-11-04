@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:rekamosi/pages/homepage.dart';
 import 'package:rekamosi/pages/login.dart';
+import 'package:rekamosi/pages/onboarding.dart';
 import 'package:rekamosi/theme.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -17,7 +18,7 @@ class _SplashState extends State<Splash> {
     Timer(
         Duration(seconds: 5),
         () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => Login())));
+            context, MaterialPageRoute(builder: (context) => Onboarding())));
   }
 
   @override
