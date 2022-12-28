@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:rekamosi/components/card.dart';
+import 'package:rekamosi/pages/bookmark.dart';
 import 'package:rekamosi/pages/detailpage.dart';
+import 'package:rekamosi/pages/profile.dart';
 import 'package:rekamosi/pages/splash.dart';
 import 'package:rekamosi/theme.dart';
+import 'package:rekamosi/data/topik.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,15 +19,26 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  void _navigateToDetailScreen(BuildContext context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => DetailPage()));
-  }
+  // void _navigateToDetailScreen(BuildContext context) {
+  //   Navigator.of(context)
+  //       .push(MaterialPageRoute(builder: (context) => DetailPage()));
+  // }
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+
+    if (_selectedIndex == 0) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => HomePage()));
+    } else if (_selectedIndex == 1) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => Bookmark()));
+    } else if (_selectedIndex == 2) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => Profile()));
+    }
   }
 
   int _selectedIndex = 0;
@@ -59,20 +74,12 @@ class _HomePageState extends State<HomePage> {
             label: "Beranda",
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/icons/search-normal.svg"),
-            activeIcon: SvgPicture.asset(
-              "assets/icons/search-bold.svg",
-              color: purplePrime,
-            ),
-            label: "Telusuri",
-          ),
-          BottomNavigationBarItem(
             icon: SvgPicture.asset("assets/icons/bookmark.svg"),
             activeIcon: SvgPicture.asset(
               "assets/icons/bookmark-bold.svg",
               color: purplePrime,
             ),
-            label: "Bookmark",
+            label: "History",
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset("assets/icons/profile.svg"),
@@ -118,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Halo, Basuki",
+                          "Halo, Erlangga",
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -344,100 +351,15 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         for (var i = 0; i < 5; i++)
-                          Column(
-                            children: [
-                              SizedBox(
-                                height: 8,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  _navigateToDetailScreen(context);
-                                },
-                                child: Card(
-                                  color: Colors.white,
-                                  shadowColor: Colors.transparent,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    padding: EdgeInsets.all(16),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(8),
-                                            ),
-                                            gradient: LinearGradient(
-                                              begin: Alignment.topLeft,
-                                              end: Alignment.bottomRight,
-                                              colors: [
-                                                purplePrime,
-                                                purpleSecond,
-                                              ],
-                                            ),
-                                          ),
-                                          padding: EdgeInsets.all(24),
-                                          child: SvgPicture.asset(
-                                            'assets/icons/code.svg',
-                                            height: 24,
-                                            width: 24,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 8,
-                                        ),
-                                        Flexible(
-                                          flex: 1,
-                                          fit: FlexFit.tight,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Pengembangan Web dengan Metode Scrum",
-                                                style: TextStyle(
-                                                  color: textColor,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 4,
-                                              ),
-                                              Text(
-                                                "Yudi Ahmad Hambali, S.Kom., M.T.",
-                                                style: TextStyle(
-                                                  color: textColor,
-                                                  fontSize: 10,
-                                                  fontWeight: FontWeight.w400,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 4,
-                                              ),
-                                              Text(
-                                                "Belum diambil",
-                                                style: TextStyle(
-                                                  color: Colors.green,
-                                                  fontSize: 10,
-                                                  fontWeight: FontWeight.w400,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                          Cards(
+                            firstColor: topik[i]['firstColor'],
+                            secondColor: topik[i]['secondColor'],
+                            svgIcons: topik[i]['svgUrl'],
+                            title: topik[i]['title'],
+                            dosen: topik[i]['dosen'],
+                            kbk: topik[i]['kbk'],
+                            status: topik[i]['status'],
+                          )
                       ],
                     ),
                   ),

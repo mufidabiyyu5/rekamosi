@@ -6,7 +6,24 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rekamosi/theme.dart';
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({super.key});
+  const DetailPage({
+    required this.firstColor,
+    required this.secondColor,
+    required this.svgIcons,
+    required this.title,
+    required this.dosen,
+    required this.kbk,
+    required this.status,
+    super.key,
+  });
+
+  final Color firstColor;
+  final Color secondColor;
+  final String svgIcons;
+  final String title;
+  final String dosen;
+  final String kbk;
+  final bool status;
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -24,8 +41,8 @@ class _DetailPageState extends State<DetailPage> {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                purplePrime,
-                purpleSecond,
+                widget.firstColor,
+                widget.secondColor,
               ],
             ),
           ),
@@ -64,7 +81,7 @@ class _DetailPageState extends State<DetailPage> {
                     height: 8,
                   ),
                   SvgPicture.asset(
-                    "assets/icons/code.svg",
+                    widget.svgIcons,
                     width: 64,
                     height: 64,
                   ),
@@ -86,7 +103,7 @@ class _DetailPageState extends State<DetailPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Pengembangan Web dengan Metode Scrum",
+                          widget.title,
                           style: TextStyle(
                             color: textColor,
                             fontSize: 16,
@@ -97,7 +114,7 @@ class _DetailPageState extends State<DetailPage> {
                           height: 8,
                         ),
                         Text(
-                          "Rekayasa Perangkat Lunak",
+                          widget.kbk,
                           style: TextStyle(
                             color: textColor,
                             fontSize: 14,
@@ -108,7 +125,7 @@ class _DetailPageState extends State<DetailPage> {
                           height: 8,
                         ),
                         Text(
-                          "Yudi Ahmad Hambali, S.Kom., M.T.",
+                          widget.dosen,
                           style: TextStyle(
                             color: textColor,
                             fontSize: 14,
@@ -143,7 +160,7 @@ class _DetailPageState extends State<DetailPage> {
                           child: ElevatedButton.icon(
                             style: ButtonStyle(
                               backgroundColor: MaterialStatePropertyAll(
-                                purplePrime,
+                                widget.firstColor,
                               ),
                               padding: MaterialStatePropertyAll(
                                 EdgeInsets.symmetric(
